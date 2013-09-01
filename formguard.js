@@ -1,3 +1,1 @@
-function formProtect() {
-    document.getElementById("email-form").setAttribute("action","safemail.php");
-}
+function formProtect(){document.getElementById("email-form").setAttribute("action","safemail.php");}

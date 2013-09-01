@@ -18,7 +18,7 @@ $randsum = $rand1 + $rand2;
   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="jquery.validate.min.js"></script>
   <script type="text/javascript" src="formguard.js" ></script>
-  <script type="text/javascript">
+    <script type="text/javascript">
   //<![CDATA[
 (function($,W,D)
 {
@@ -28,7 +28,8 @@ $randsum = $rand1 + $rand2;
     {
         setupFormValidation: function()
         {
-		    // add a custom validator - the exact answer
+		   //////////////////////////////////////////////////////////////////////////////////////////////
+           // a quirky custom validator - the exact answer - LOL - if it gets broken will obfuscate later 
             $.validator.addMethod(
                "exactomundo",
                 function(value, element, rvalue) 
@@ -86,73 +87,16 @@ $randsum = $rand1 + $rand2;
 //]]>
   </script>
 
-<title>Maui Cricket Club</title>
 
+  <title>Maui Cricket Club</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="mm_travel2.css" type="text/css" />
   
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="mm_travel2.css" type="text/css" />
-  
-  <style type="text/css">
-  #email-form {
-    background: url("form-fieldset.gif") repeat-x scroll left bottom #F8FDEF;
-    border: 1px solid #DFDCDC;
-    border-radius: 15px 15px 15px 15px;
-    display: inline-block;
-    margin-bottom: 30px;
-    margin-left: 0px;
-    margin-top: 10px;
-    padding: 25px 50px 10px;
-    width: 350px;
-}
-
-#email-form .fieldgroup {
-    background: url("form-divider.gif") repeat-x scroll left top transparent;
-    display: inline-block;
-    padding: 8px 10px;
-    width: 340px;
-}
-
-#email-form .fieldgroup label {
-    float: left;
-	padding: 7px 0 0;
-    text-align: left;
-    width: 99px;
-}
-
-#email-form .fieldgroup input{
-    float: left;
-    height: 20px;
-	width: 200px;
-}
-#email-form .fieldgroup textarea{
-    float: left;
-    height: 100px;
-	width: 300px;
-}
-#email-form .submit {
-    padding: 10px;
-	width: 300px;
-	height: 40px !important;
-}
-
-#email-form .fieldgroup label.error {
-    color: #FB3A3A;
-    display: inline-block;
-    margin: 4px 0 5px 0px;
-    padding: 0;
-    text-align: left;
-    width: 220px;
-}
-  
-  </style>
-
-  
-
-<meta name="verify-v1" content="sodqMXCZy7x8ZSVKbMlpRIHhoJchZI/pc9wglqwkwkU=" />
+  <meta name="verify-v1" content="sodqMXCZy7x8ZSVKbMlpRIHhoJchZI/pc9wglqwkwkU=" />
 
 
 
@@ -161,15 +105,8 @@ $randsum = $rand1 + $rand2;
 
 
  <body bgcolor="#C0DFFD">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+ <div id="fb-root"></div>
+  <script type="text/javascript" src="fb.js" ></script>
 
    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 
