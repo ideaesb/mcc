@@ -1,10 +1,12 @@
 ﻿<?php
+// Caching directives - CANNOT MODIFY GO-DADDY headers 
+//header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+//header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
-$rand1 = rand(5, 12);
-$rand2 = rand(3,11);
-
-$randsum = $rand1 + $rand2;
-
+// random between 4 and 8 to determine length of captcha code
+$rand1 = rand(4, 8);
+// this clumsy text is used several times, so centralize it
+$captcha_default = "CaSe InSeNsItIvE oK...";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -28,16 +30,11 @@ $randsum = $rand1 + $rand2;
     {
         setupFormValidation: function()
         {
-		   //////////////////////////////////////////////////////////////////////////////////////////////
-           // a quirky custom validator - the exact answer - LOL - if it gets broken will obfuscate later 
-            $.validator.addMethod(
-               "exactomundo",
-                function(value, element, rvalue) 
-				{
-                  if (value == rvalue) return true;
-                  else return false; 
-                },
-                "The answer is <?= $randsum ?>"
+		    // add validator method that recognizes default value has been unchanged 
+			$.validator.addMethod(
+                'noPlaceholder', function (value, element) {
+                    return value !== element.defaultValue;
+                }, 'Please enter a value.'
              );
 		
             //form validation rules
@@ -49,34 +46,23 @@ $randsum = $rand1 + $rand2;
                         required: true,
                         email: true
                     },
-                    rsum : {
-                        required: true,
-                        exactomundo:  <?= $randsum ?>
-					},
-					captcha_code : {
-					    required: true,
-						minlength: 6,
-						maxlength: 6
-					},
                     comments: {
                         required: true,
                         minlength: 5
                     },
+					captcha_code: {
+					    noPlaceholder: true
+					},	  
                 },
                 messages: {
                     FirstName: "Please enter your First Name",
                     LastName: "Please enter your Last Name",
-                    captcha_code: {
-                        required: "Please enter code, if cannot see click Different Image",
-                        minlength: "Code should be 6 characters long",
-                        maxlength: "Code should be 6 characters long"
-                    },
                     comments: {
                         required: "Please do not send empty message",
                         minlength: "Your email must be at least 5 characters long"
                     },
                     email: "Please enter a valid email address",
-                    rsum: "Please type the correct answer: <?= $randsum ?>",
+					captcha_code: "Please enter CAPTCHA code shown above",
                 },
                 submitHandler: function(form) 
 				{
@@ -457,25 +443,22 @@ Weekly Saturday 4 PM HST
             </div>
 
             <div class="fieldgroup">
-                <label for="rsum">What is <?= $rand1 ?> + <?= $rand2 ?> ?</label>
-                <input type="text" name="rsum" value="Prove you are human ;-)">
-            </div>
-
-            <div class="fieldgroup" align="center">
-                <img id="captcha" src="secureimage/securimage_show.php" alt="CAPTCHA Image" />
-            </div>
-            
-            <div class="fieldgroup">
-                <label for="captcha_code"><a href="#" onclick="document.getElementById('captcha').src = 'secureimage/securimage_show.php?' + Math.random(); return false">Different Image?</a></label>
-                <input type="text" name="captcha_code" value="CaSe InSeNsItIvE oK...">
-            </div>
-            
-            
-            <div class="fieldgroup">
                <label for="comments" style="padding-top:0px;">Message:</label>
                <textarea name="comments"></textarea>
             </div>
 
+            <div class="fieldgroup" align="center">
+                <img id="captcha" src="secureimage/securimage_show.php?lambai=<?=$rand1?>" alt="CAPTCHA Image" />
+                <div align="left">
+                  <a href="#" onclick="document.getElementById('captcha').src = 'secureimage/securimage_show.php?' + Math.random() + '&lambai=' + Math.floor((Math.random()*4)+4); return false">Change Code</a>
+                </div>
+            </div>
+            
+            <div class="fieldgroup" >
+                <label for="captcha_code"><a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1142&context=compsci" target="_blank">CAPTCHA</a> Code:</label>
+                <input type="text" name="captcha_code" value="<?= $captcha_default ?>" onfocus="if(this.value == '<?= $captcha_default ?>'){this.value = '';}" onblur="if(this.value == ''){this.value='<?= $captcha_default ?>';}">
+            </div>
+            
             <div class="fieldgroup">
                 <input type="submit" value="Send" class="submit">
             </div>
