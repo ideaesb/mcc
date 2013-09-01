@@ -53,6 +53,11 @@ $randsum = $rand1 + $rand2;
                         required: true,
                         exactomundo:  <?= $randsum ?>
 					},
+					captcha_code : {
+					    required: true,
+						minlength: 6,
+						maxlength: 6
+					},
                     comments: {
                         required: true,
                         minlength: 5
@@ -61,6 +66,11 @@ $randsum = $rand1 + $rand2;
                 messages: {
                     FirstName: "Please enter your First Name",
                     LastName: "Please enter your Last Name",
+                    captcha_code: {
+                        required: "Please enter code, if cannot see click Different Image",
+                        minlength: "Code should be 6 characters long",
+                        maxlength: "Code should be 6 characters long"
+                    },
                     comments: {
                         required: "Please do not send empty message",
                         minlength: "Your email must be at least 5 characters long"
@@ -449,6 +459,15 @@ Weekly Saturday 4 PM HST
             <div class="fieldgroup">
                 <label for="rsum">What is <?= $rand1 ?> + <?= $rand2 ?> ?</label>
                 <input type="text" name="rsum" value="Prove you are human ;-)">
+            </div>
+
+            <div class="fieldgroup" align="center">
+                <img id="captcha" src="secureimage/securimage_show.php" alt="CAPTCHA Image" />
+            </div>
+            
+            <div class="fieldgroup">
+                <label for="captcha_code"><a href="#" onclick="document.getElementById('captcha').src = 'secureimage/securimage_show.php?' + Math.random(); return false">Different Image?</a></label>
+                <input type="text" name="captcha_code" value="CaSe InSeNsItIvE oK...">
             </div>
             
             
