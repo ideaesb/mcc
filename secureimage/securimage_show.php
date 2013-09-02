@@ -49,17 +49,42 @@
 
 require_once dirname(__FILE__) . '/securimage.php';
 
-$lambai = $_GET['lambai'];
+// lambai = length of captcha code 
+$lambai = (isset($_GET['lambai']) ? $_GET['lambai'] : null);
 
+// instantiate secure image object
 $img = new Securimage();
 
-// over-ride length 
-if (isset($lambai))$img->code_length = $lambai;
-else $lambai = $img->code_length;
+// over-ride default length in Securimage
+if (isset($lambai))
+{
+  // if user set the lambai - then set the code length accordingly 
+  $img->code_length = $lambai;
+}
+else 
+{
+   // otherwise lambai becomes whatever the default code length is 
+  $lambai = $img->code_length;
+}
+
+
+// totally artificial - for MCC use only 
+if ($lambai >= 4 && $lambai <= 7)
+{
+  // if length is between 4 and 8, default String code 
+  $img->image_signature = "Enter $lambai letter code below:";
+  $img->captcha_type = Securimage::SI_CAPTCHA_STRING;
+}
+else
+{
+  // otherwise generate a math problem 
+  $img->image_signature = "Solve the math problem below:";
+  $img->captcha_type = Securimage::SI_CAPTCHA_MATHEMATIC;
+}
 
 $img->image_width = 320; 
 $img->image_height = (int)($img->image_width * 0.35); 
-$img->image_signature = "Enter $lambai letter code below:";
+
 
 
 

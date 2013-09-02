@@ -3,7 +3,7 @@
 include_once 'secureimage/securimage.php';
 $securimage = new Securimage();
 $captchaStr = $_POST['captcha_code'];
-$correctStr = $securimage->getCode(false, false);
+
 
 if ($securimage->check($captchaStr))
 {
@@ -34,6 +34,7 @@ if ($securimage->check($captchaStr))
 }
 else
 {
+   $correctStr = $securimage->getCode(false,false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -87,10 +88,24 @@ var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
           <td class="bodyText"><p>Your message will NOT be sent.  Feel free to <a href="javascript:history.go(-1);">try again</a>. 
 		</tr>
         <tr>
-          <td class="bodyText"><p>You Entered <a href="http://www.captcha.net/" target="_blank">CAPTCHA</a> code <strong><?= $captchaStr ?></strong>, the required answer (CaSe InSeNsItIvE oK) was <strong><?= $correctStr ?></strong>.</p></td>
+<?php
+   if (is_numeric($correctStr))
+   {
+?>
+      <td class="bodyText"><p>You Entered <a href="http://www.captcha.net/" target="_blank">CAPTCHA</a> answer <strong><?= $captchaStr ?></strong>, the correct answer (a number) was <strong><?= $correctStr ?></strong>.</p></td>
+<?php
+    }
+	else
+	{
+?>
+       <td class="bodyText"><p>You Entered <a href="http://www.captcha.net/" target="_blank">CAPTCHA</a> code <strong><?= $captchaStr ?></strong>, the correct code (CaSe InSeNsItIvE oK) was <strong><?= $correctStr ?></strong>.</p></td>
+<?php
+     }
+?>          
+          
 		</tr>
         <tr>
-          <td align="center"><img src="logo.png" height="200"/></td>
+          <td align="left"><img src="logo.png" height="200"/></td>
         </tr>
       </table>	  </td>
 	<td width="100%">&nbsp;</td>

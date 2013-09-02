@@ -3,10 +3,10 @@
 //header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
-// random between 4 and 8 to determine length of captcha code
-$rand1 = rand(4, 8);
+// random between 1 and 8 to determine length of captcha code
+$rand1 = rand(1, 8);
 // this clumsy text is used several times, so centralize it
-$captcha_default = "CaSe InSeNsItIvE oK...";
+$captcha_default = "Type text or number...";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -22,6 +22,11 @@ $captcha_default = "CaSe InSeNsItIvE oK...";
   <script type="text/javascript" src="formguard.js" ></script>
     <script type="text/javascript">
   //<![CDATA[
+ 
+ function getImnage()
+ {
+   
+ } 
 (function($,W,D)
 {
     var JQUERY4U = {};
@@ -62,7 +67,7 @@ $captcha_default = "CaSe InSeNsItIvE oK...";
                         minlength: "Your email must be at least 5 characters long"
                     },
                     email: "Please enter a valid email address",
-					captcha_code: "Please enter CAPTCHA code shown above",
+					captcha_code: "Please enter code shown or solve math",
                 },
                 submitHandler: function(form) 
 				{
@@ -308,7 +313,7 @@ $captcha_default = "CaSe InSeNsItIvE oK...";
 <!-- td class="pageName">Welcome to the Hawaiian <a href="http://www.lords.org/mcc/about-mcc/" target="_blank">MCC</a>!</td -->
 <td class="pageName">
 
-<a href="https://maps.google.com/?t=h&ie=UTF8&ll=20.913053,-156.391837&spn=0.00124,0.00114&z=19&source=embed" tabindex="0" title="Google Maps" accesskey="m" target="_blank">MAP OF CRICKET GROUND</a><BR/>
+<a href="map.php" target="_blank">MAP OF CRICKET GROUND</a><BR/>
 Weekly Saturday 4 PM HST
 
 
@@ -429,34 +434,37 @@ Weekly Saturday 4 PM HST
 
             <div class="fieldgroup">
                 <label for="FirstName">First Name:</label>
-                <input type="text" name="FirstName">
+                <input type="text" name="FirstName" title="Enterr First Name">
             </div>
 
             <div class="fieldgroup">
                 <label for="LastName">Last Name:</label>
-                <input type="text" name="LastName">
+                <input type="text" name="LastName" title="Enter Last Name">
             </div>
 
             <div class="fieldgroup">
                 <label for="email">Email:</label>
-                <input type="text" name="email">
+                <input type="text" name="email" title="Enter YOUR Email Address - this WILL be shared with club meembers">
             </div>
 
             <div class="fieldgroup">
                <label for="comments" style="padding-top:0px;">Message:</label>
-               <textarea name="comments"></textarea>
+               <textarea name="comments" title="Enter your email message to Maui Cricket Club"></textarea>
             </div>
 
             <div class="fieldgroup" align="center">
                 <img id="captcha" src="secureimage/securimage_show.php?lambai=<?=$rand1?>" alt="CAPTCHA Image" />
                 <div align="left">
-                  <a href="#" onclick="document.getElementById('captcha').src = 'secureimage/securimage_show.php?' + Math.random() + '&lambai=' + Math.floor((Math.random()*4)+4); return false">Change Code</a>
+                  <a href="#" onclick="document.getElementById('captcha').src = 'secureimage/securimage_show.php?' + Math.random() + '&lambai=' + Math.floor((Math.random()*8)+1); return false">Change Image</a>
                 </div>
             </div>
             
             <div class="fieldgroup" >
-                <label for="captcha_code"><a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1142&context=compsci" target="_blank">CAPTCHA</a> Code:</label>
-                <input type="text" name="captcha_code" value="<?= $captcha_default ?>" onfocus="if(this.value == '<?= $captcha_default ?>'){this.value = '';}" onblur="if(this.value == ''){this.value='<?= $captcha_default ?>';}">
+                <label for="captcha_code">Answer <a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1142&context=compsci" target="_blank">CAPTCHA</a>:</label>
+                <input type="text" name="captcha_code" value="<?= $captcha_default ?>" 
+                                   onfocus="if(this.value == '<?= $captcha_default ?>'){this.value = '';}" 
+                                   onblur="if(this.value == ''){this.value='<?= $captcha_default ?>';}"
+                                   title="Enter code, UPPER or lower case, does not matter; for math, enter JUST number answer">
             </div>
             
             <div class="fieldgroup">
